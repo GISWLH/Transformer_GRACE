@@ -6,10 +6,8 @@ Please considering using cuda GPU to train the newwork
 The environment recommended are:
 
 * python3.8.12  
-* 
-cuda_11.6.1_511.
-* 
-cudnn_8.3.2.  .7.0
+* cuda_11.6.1_511.
+* cudnn_8.3.2.7.0
 
 ## input data
 
