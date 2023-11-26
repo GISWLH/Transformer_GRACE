@@ -14,7 +14,7 @@ The environment recommended are:
 Note: the original input require large data which cannot be uploaded to GitHub or shared easily, such as ERA5 datasets. 
 As a result, we have uploaded it to figure share.
 
-[![DOI](https://zenodo.org/badge/DOI/10.6084/m9.figshare.24297604.svg)](https://doi.org/10.5281/zenodo.7692016)
+[![DOI](https://zenodo.org/badge/DOI/10.6084/m9.figshare.24297604.svg)](https://doi.org/10.6084/m9.figshare.24297604)
 
 ## Build the model
 
