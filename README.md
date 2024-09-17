@@ -9,6 +9,11 @@ The environment recommended are:
 * cuda_11.6.1_511.
 * cudnn_8.3.2.7.0
 
+## fill the data gap product
+
+[![DOI](https://zenodo.org/badge/DOI/10.6084/m9.figshare.24614958.svg)](https://doi.org/10.6084/m9.figshare.24614958)
+
+
 ## input data
 
 Note: the original input require large data which cannot be uploaded to GitHub or shared easily, such as ERA5 datasets. 
