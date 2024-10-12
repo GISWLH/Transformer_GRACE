@@ -120,3 +120,86 @@ class context_embedding(torch.nn.Module):
 ![](https://imagecollection.oss-cn-beijing.aliyuncs.com/legion/20231012175557.png)
 
 ![](https://imagecollection.oss-cn-beijing.aliyuncs.com/legion/20231012175619.png)
+
+## NOTE: The code of log-sparse is not included, this only shows the full causal convolution.  
+
+We have additional research that uses these strategies, the code for sparse convolution will be released later.
+Here we provide part of the pseudo-code:
+
+```
+import torch
+import torch.nn.functional as F
+import numpy as np
+
+class LogSparseCausalConv1d(torch.nn.Module):
+    def __init__(self,
+                 in_channels,
+                 out_channels,
+                 kernel_size,
+                 max_dilation,
+                 stride=1,
+                 bias=True):
+        """
+        Args:
+            in_channels: The number of input channels
+            out_channels: The number of output channels
+            kernel_size: The size of kernel
+            max_dilation: Maximum expansion rate of logarithmic sparse 
+            stride: Stride
+            bias: Whether to use bias
+        """
+        super(LogSparseCausalConv1d, self).__init__()
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+        self.kernel_size = kernel_size
+        self.max_dilation = max_dilation
+        self.stride = stride
+        self.bias = bias
+
+        # 初始化权重和偏置
+        self.weight = torch.nn.Parameter(torch.Tensor(out_channels, in_channels, kernel_size))
+        if bias:
+            self.bias = torch.nn.Parameter(torch.Tensor(out_channels))
+        else:
+            self.register_parameter('bias', None)
+        
+        self.reset_parameters()
+    
+    def reset_parameters(self):
+        torch.nn.init.kaiming_uniform_(self.weight, a=np.sqrt(5))
+        if self.bias is not None:
+            fan_in, _ = torch.nn.init._calculate_fan_in_and_fan_out(self.weight)
+            bound = 1 / np.sqrt(fan_in)
+            torch.nn.init.uniform_(self.bias, -bound, bound)
+    
+    def forward(self, x):
+        batch_size, in_channels, seq_len = x.size()
+
+        # Appropriate padding of inputs to ensure causality
+        padding = (self.kernel_size - 1) * self.max_dilation
+        x = F.pad(x, (padding, 0))  # 左侧填充
+
+        # Compute the log sparse expansion rate, set to logarithmic growth
+        dilations = self._get_log_dilations(seq_len)
+
+        output = torch.zeros(batch_size, self.out_channels, seq_len, device=x.device)
+
+        # Iterate over dilations, convolve using different expansion rates
+        for i, dilation in enumerate(dilations):
+            conv_output = F.conv1d(x, self.weight, self.bias, stride=self.stride, dilation=dilation)
+            output[:, :, i] = conv_output[:, :, i]
+
+        return output
+
+    def _get_log_dilations(self, seq_len):
+        """
+        Generate sparse logarithmically spaced convolutional expansion rates based on time series length and maximum expansion rate.
+        """
+        dilations = [1]
+        for i in range(1, seq_len):
+            dilation = min(2 ** int(np.log2(i + 1)), self.max_dilation)
+            dilations.append(dilation)
+        return dilations
+
+```
+
