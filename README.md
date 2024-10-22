@@ -1,5 +1,7 @@
 # Transformer_GRACE
-fill the GRACE gap using novel Transformer method
+fill the GRACE gap using novel Transformer method  
+
+Wang, L., & Zhang, Y. (2024). Filling GRACE data gap using an innovative transformer-based deep learning approach. Remote Sensing of Environment, 315, 114465. https://doi.org/10.1016/j.rse.2024.114465  
 
 Please considering using cuda GPU to train the newwork
 
