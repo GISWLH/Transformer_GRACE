@@ -1,6 +1,6 @@
 # Transformer_GRACE
 
-![logo](files\logo.png)
+![logo](files/logo.png)
 
 fill the GRACE gap using novel Transformer method  
 
