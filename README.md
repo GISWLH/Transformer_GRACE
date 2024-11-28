@@ -1,6 +1,6 @@
 # Transformer_GRACE
 
-![logo](files/logo.png)
+![](https://imagecollection.oss-cn-beijing.aliyuncs.com/office/logo.png)
 
 fill the GRACE gap using novel Transformer method  
 
