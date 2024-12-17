@@ -20,7 +20,7 @@ Single month data would be found at figshare below
 
 [![DOI](https://zenodo.org/badge/DOI/10.6084/m9.figshare.24614958.svg)](https://doi.org/10.6084/m9.figshare.24614958)
 
-We would also provide full month ``.nc`` file, you can download from [Google Drive][https://drive.google.com/file/d/1l7oQdkEUl-bvoH7OTg9mKlaIybtuscqA/view?usp=drive_link] or [BaidunetDisk](https://pan.baidu.com/s/1Zah2ILpn-DTjDG-WimT_TQ?pwd=ancc)
+We would also provide full month ``.nc`` file, you can download from [Google Drive](https://drive.google.com/file/d/1l7oQdkEUl-bvoH7OTg9mKlaIybtuscqA/view?usp=drive_link) or [BaidunetDisk](https://pan.baidu.com/s/1Zah2ILpn-DTjDG-WimT_TQ?pwd=ancc)
 
 
 ## input data
